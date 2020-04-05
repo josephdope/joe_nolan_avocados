@@ -1,2 +1,2 @@
-# joe_nolan_data_science
-Just a place to practice some data science.
+# Avocadoptimized
+Are you an avocado farmer looking for the best place to sell your avocados!? Look no further! We're here to make sure you're getting top dollar for those sweet cado boys.
