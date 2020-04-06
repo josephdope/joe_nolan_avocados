@@ -47,6 +47,7 @@ class AvocadoPipeline:
         self._create_date_features()
         self._create_location_features()
         self._get_dummies()
+        self._write()
 
     def _read_file(self):
         self.parser.add_argument('-i','--input_file', dest='input_file', action='store',
