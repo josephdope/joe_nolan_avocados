@@ -1,4 +1,4 @@
-name: avocado_model
+name: avocados
 channels:
   - conda-forge
   - anaconda

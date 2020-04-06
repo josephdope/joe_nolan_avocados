@@ -1,2 +1,2 @@
 # Avocadoptimized
-Are you an avocado farmer looking for the best place to sell your avocados!? Look no further! We're here to make sure you're getting top dollar for those sweet cado boys.
+Are you an avocado farmer looking for the best place to sell your avocados!? Look no further! We're here to help make sure you're getting top dollar for those sweet 'cado boys.
