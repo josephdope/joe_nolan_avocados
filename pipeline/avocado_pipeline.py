@@ -47,6 +47,7 @@ class AvocadoPipeline:
         self._create_date_features()
         self._create_location_features()
         self._get_dummies()
+        self._write()
 
     def _read_file(self):
         self.parser.add_argument('-i','--input_file', dest='input_file', action='store',
@@ -64,24 +65,22 @@ class AvocadoPipeline:
         self.df['Date'] = pd.to_datetime(self.df['Date'], format='%Y/%m/%d')
         self.df['Month'] = self.df['Date'].apply(lambda x: str(x.month))
         self.df['Week'] = self.df['Date'].apply(lambda x: str(x.week))
-        self.df.to_csv('../data/avocado_modeling_file.csv', index = False)
 
     def _create_location_features(self):
         nom = geocoders.Nominatim(user_agent='avocados')
         unique_regions = pd.DataFrame(self.df['region'].unique(), columns=['region'])
         unique_regions['region_tmp'] = unique_regions['region'].apply(lambda x: split_words(x))
         unique_regions[['lat', 'long']] = unique_regions['region_tmp'].apply(lambda x: make_map(x, nom))
-
-        unique_regions.to_csv('../data/loc_test.csv', index = False)
+        self.df = self.df.merge(unique_regions, on='region', how = 'left')
 
 
     def _get_dummies(self):
         obj_types = self.df.select_dtypes(include=['object'])
         dummied = pd.get_dummies(obj_types,prefix=obj_types.columns, drop_first=True)
         self.df = self.df.merge(dummied, left_index=True, right_index=True)
-        
-        
-        self.df.to_csv('../data/avocado_modeling_file.csv', index = False)
+
+    def _write(self):    
+        self.df.to_csv(self.output_dir, index = False)
 
 if __name__ == '__main__':
     avocado_pipeline = AvocadoPipeline()
