@@ -71,7 +71,7 @@ class AvocadoPipeline:
         unique_regions = pd.DataFrame(self.df['region'].unique(), columns=['region'])
         unique_regions['region_tmp'] = unique_regions['region'].apply(lambda x: split_words(x))
         unique_regions[['lat', 'long']] = unique_regions['region_tmp'].apply(lambda x: make_map(x, nom))
-        self.df = self.df.merge(unique_regions, on='region', how = 'left')
+        self.df = self.df.merge(unique_regions, on='region', how = 'left').drop('region_tmp', axis = 1)
 
 
     def _get_dummies(self):
